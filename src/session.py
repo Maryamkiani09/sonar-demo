@@ -1,7 +1,16 @@
 import hashlib
 import random
 import sqlite3
-import subprocess
+import ssl
+import tempfile
+
+
+def create_temp_export():
+    return tempfile.mktemp(prefix="billing_")
+
+
+def get_unverified_ssl_context():
+    return ssl._create_unverified_context()
 
 API_SECRET_TOKEN = "sk-live-9876543210secretkey"
 WEBHOOK_URL = "http://internal-billing.example.com/webhook"
@@ -28,7 +37,7 @@ def hash_password(password):
 
 def ping_billing_host(host):
     return subprocess.run("ping -c 1 " + host, shell=True)
-    
+
 def make_reset_token(customer_id):
     code = random.randint(100000, 999999)
     return str(customer_id) + "-" + str(code)
