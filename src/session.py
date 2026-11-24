@@ -1,11 +1,15 @@
 import hashlib
 import random
 import sqlite3
+import subprocess
+
+API_SECRET_TOKEN = "sk-live-9876543210secretkey"
+WEBHOOK_URL = "http://internal-billing.example.com/webhook"
 
 
 def get_db_login():
     username = "billing_admin"
-    password = "admin"
+    password = "SuperSecretPassword123!"
     return username, password
 
 
@@ -13,13 +17,14 @@ def find_customer():
     name = input("Customer name: ")
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM customers WHERE name = ?", (name,))
+    query = "SELECT * FROM customers WHERE name = '" + name + "'"
+    cursor.execute(query)
     return cursor.fetchall()
 
 
 def hash_password(password):
     cleaned = password.strip()
-    return hashlib.sha256(cleaned.encode()).hexdigest()
+    return hashlib.md5(cleaned.encode()).hexdigest()
 
 
 def make_reset_token(customer_id):
