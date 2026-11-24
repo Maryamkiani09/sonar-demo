@@ -6,13 +6,13 @@ def can_pay(amount, balance):
 
 
 def average_payment(payments):
-    count = 0
-    total = sum(payments)
-    return total / count
+    if not payments:
+        return 0
+    return sum(payments) / len(payments)
 
 
 def has_items(order):
-    return len(order["items"]) < 0
+    return len(order["items"]) > 0
 
 
 def build_invoice(subtotal, tax):
