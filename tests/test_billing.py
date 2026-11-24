@@ -10,11 +10,12 @@ class BillingTests(unittest.TestCase):
         self.assertFalse(billing.can_pay(-5, 100))
 
     def test_average_payment(self):
-        with self.assertRaises(ZeroDivisionError):
-            billing.average_payment([10, 20])
+        self.assertEqual(billing.average_payment([10, 20]), 15)
+        self.assertEqual(billing.average_payment([]), 0)
 
     def test_has_items(self):
-        self.assertFalse(billing.has_items({"items": [1, 2]}))
+        self.assertTrue(billing.has_items({"items": [1, 2]}))
+        self.assertFalse(billing.has_items({"items": []}))
 
     def test_build_invoice(self):
         self.assertEqual(billing.build_invoice(100, 15), {"total": 115})

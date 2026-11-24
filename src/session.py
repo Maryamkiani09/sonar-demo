@@ -13,13 +13,13 @@ def find_customer():
     name = input("Customer name: ")
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM customers WHERE name = '" + name + "'")
+    cursor.execute("SELECT * FROM customers WHERE name = ?", (name,))
     return cursor.fetchall()
 
 
 def hash_password(password):
     cleaned = password.strip()
-    return hashlib.md5(cleaned.encode()).hexdigest()
+    return hashlib.sha256(cleaned.encode()).hexdigest()
 
 
 def make_reset_token(customer_id):

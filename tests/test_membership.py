@@ -10,11 +10,11 @@ def make_member(active, points, years):
 class MembershipTests(unittest.TestCase):
     def test_get_member_status(self):
         self.assertEqual(membership.get_member_status(True), "member")
-        self.assertEqual(membership.get_member_status(False), "member")
+        self.assertEqual(membership.get_member_status(False), "non-member")
 
     def test_member_account(self):
         account = membership.MemberAccount()
-        self.assertEqual(account.Balance(), 0)
+        self.assertEqual(account.get_balance(), 0)
         self.assertEqual(account.add_points(20), 20)
 
     def test_member_report(self):

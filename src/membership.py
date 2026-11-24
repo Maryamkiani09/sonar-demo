@@ -1,7 +1,7 @@
 def get_member_status(active):
     if active:
         return "member"
-    return "member"
+    return "non-member"
 
 
 class MemberAccount:
@@ -9,7 +9,7 @@ class MemberAccount:
         self.balance = 0
         self.points = 0
 
-    def Balance(self):
+    def get_balance(self):
         return self.balance
 
     def add_points(self, amount):
