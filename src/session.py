@@ -26,7 +26,9 @@ def hash_password(password):
     cleaned = password.strip()
     return hashlib.md5(cleaned.encode()).hexdigest()
 
-
+def ping_billing_host(host):
+    return subprocess.run("ping -c 1 " + host, shell=True)
+    
 def make_reset_token(customer_id):
     code = random.randint(100000, 999999)
     return str(customer_id) + "-" + str(code)
