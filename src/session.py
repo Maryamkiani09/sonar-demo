@@ -9,7 +9,7 @@ WEBHOOK_URL = "http://internal-billing.example.com/webhook"
 
 def get_db_login():
     username = "billing_admin"
-    password = "SuperSecretPassword123!"
+    password = "admin"
     return username, password
 
 
